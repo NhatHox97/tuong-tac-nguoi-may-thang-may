@@ -4,6 +4,7 @@
             <div class="display">Lorem ipsum dolor sit amet, consecteteuer adpsim elit</div>
             <div class="buttons">
                 <div class="btn-container bottom">
+                    <!-- Set floor T to 0 -->
                     <button class="btn-floor" data-set-floor="0">T</button>
                 </div>
                 <div v-for="i in 6" :key="i" class="btn-container floor">
@@ -19,8 +20,9 @@
                 </div>
             </div>
             <div class="floors">
-                <div v-for="i in 7" :key="i" class="floor" :data-floor="i">
-                    <div v-if="i === 0" class="floor-door"></div>
+                <!-- Adjust the loop to match the button-floor mapping -->
+                <div v-for="i in 7" :key="i" class="floor" :data-floor="i - 1">
+                    <div v-if="i - 1 === 0" class="floor-door"></div>
                     <div v-else class="floor-window"></div>
                 </div>
             </div>
@@ -47,8 +49,8 @@ export default {
             var currentFloor = null;
             var leavingFloor = false;
             var elevatorStatus = 'idle';
-            var elevatorWaitingTime = 2000;
-            var elevatorWaitTime = 2000;
+            var elevatorWaitingTime = 500;
+            var elevatorWaitTime = 500;
             var previousTime = new Date().getTime();
             var deltaTime = 0;
 
@@ -143,16 +145,16 @@ export default {
 
         updateDisplay(display, currentFloor, destinyFloors) {
             const floorNames = [
-                "Térreo",
-                "Primeiro Andar",
-                "Segundo Andar",
-                "Terceiro Andar",
-                "Quarto Andar",
-                "Quinto Andar",
-                "Sexto Andar"
+                "Tầng trệt",
+                "Tầng 1",
+                "Tầng 2",
+                "Tầng 3",
+                "Tầng 4",
+                "Tầng 5",
+                "Tầng 6",
             ];
 
-            display.innerHTML = `${floorNames[parseInt(currentFloor.getAttribute("data-floor"))]} ${destinyFloors[0] != null ? (destinyFloors[0].offsetTop < currentFloor.offsetTop ? '<br />Subindo' : '<br />Descendo') : ''
+            display.innerHTML = `${floorNames[parseInt(currentFloor.getAttribute("data-floor"))]} ${destinyFloors[0] != null ? (destinyFloors[0].offsetTop < currentFloor.offsetTop ? '<br />Đi lên' : '<br />Đi xuống') : ''
                 }`;
         },
 
