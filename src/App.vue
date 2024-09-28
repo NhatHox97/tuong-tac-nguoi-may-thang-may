@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ElavatorSimulator msg="Welcome to nhom nam 24.1"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ElavatorSimulator from './components/ElavatorSimulator.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ElavatorSimulator
   }
 }
 </script>
