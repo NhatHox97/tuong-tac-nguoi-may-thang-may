@@ -23,7 +23,11 @@
                 <!-- Adjust the loop to match the button-floor mapping -->
                 <div v-for="i in 7" :key="i" class="floor" :data-floor="i - 1">
                     <div v-if="i - 1 === 0" class="floor-door"></div>
-                    <div v-else class="floor-window"></div>
+                    <div v-else class="floor-window btn-container bottom">
+                        <!-- Up arrow -->
+                         <button class="arrow" :data-set-floor="i - 1">UP</button>
+                         <button class="arrow" :data-set-floor="i - 1">DOWN</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,6 +47,7 @@ export default {
             // let elevatorLight = elevator.querySelector(".elevator-light");
             let floors = this.$el.querySelectorAll(".building .floor");
             let buttons = this.$el.querySelectorAll(".handle button");
+            let arrows = this.$el.querySelectorAll(".arrow");
             let display = this.$el.querySelector(".display");
 
             var destinyFloors = [];
@@ -59,6 +64,27 @@ export default {
 
             buttons.forEach(button => {
                 button.addEventListener("click", function () {
+                    console.log("=============== listen here")
+                    let setFloor = this.getAttribute("data-set-floor");
+                    let selectedFloor = Array.from(floors).find(f => f.getAttribute("data-floor") == setFloor);
+
+                    if (!destinyFloors.some(df => df.getAttribute("data-floor") == selectedFloor.getAttribute("data-floor"))) {
+                        if (selectedFloor.getAttribute("data-floor") != currentFloor?.getAttribute("data-floor")) {
+                            destinyFloors.push(selectedFloor);
+                        }
+                    }
+                    leavingFloor = true;
+                    if (elevatorStatus === 'idle') {
+                        elevatorStatus = 'closing';
+                    }
+                });
+            });
+
+
+            arrows.forEach(button => {
+                button.addEventListener("click", function () {
+                    console.log("=============== arrow")
+                    console.log("==============", this)
                     let setFloor = this.getAttribute("data-set-floor");
                     let selectedFloor = Array.from(floors).find(f => f.getAttribute("data-floor") == setFloor);
 
@@ -173,4 +199,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/ElevatorStyles.scss';
+
+
+.arrow {
+    position: relative;
+    left: 100%
+}
+.arrow {
+    position: relative;
+    left: 100%
+}
 </style>

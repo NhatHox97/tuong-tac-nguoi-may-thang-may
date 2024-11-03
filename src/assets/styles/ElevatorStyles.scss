@@ -84,12 +84,12 @@ button.btn-floor {
   outline:none;
   
   &:hover {
-    border-color:lime;
+    // border-color:lime;
   }
   &:active, &.active {
-    background:lime;
-    color:lighten(lime,40%);
-    border-color:green;
+    // background:lime;
+    // color:lighten(lime,40%);
+    // border-color:green;
   }
 }
 
